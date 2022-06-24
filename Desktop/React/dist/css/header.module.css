@@ -1,0 +1,18 @@
+.header {
+  background-color: #454685;
+  max-width: 100%;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+.header__title {
+  font-size: 1.8em;
+}
+
+.header__employeesCount {
+  font-size: 1.2em;
+}
+
+.header__employeesWithPremium {
+  font-size: 1.2em;
+}
