@@ -1,0 +1,15 @@
+@import '../../vars/vars.scss';
+
+.app {
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 100%;
+    padding: 20px;
+    .SearchPanelWrapper {
+        background-color: $blueclr;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: $mn;
+        box-shadow: $boxsh;
+    }
+}

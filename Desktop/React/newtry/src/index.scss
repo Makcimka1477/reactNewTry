@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+body, html, li, ol, ul, *, *:after, *:before, img, p, h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style-type: none;
+}
+
+body, html, #root {
+  height: 100%;
+  background-color: #e5e5e5;
+}
+
+input {
+  border: none;
+  padding: 0 20px;
+  outline: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

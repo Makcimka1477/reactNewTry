@@ -1,8 +1,8 @@
 $mn: 30px;
 $pg: 30px;
-$bg-clr: rgb(69, 70, 133);
-$clr: rgb(255, 255, 255);
-
+$blueclr: rgb(61, 90, 128);
+$whtclr: rgb(255, 255, 255);
+$boxsh: 10px 5px 20px 0 rgba(0,0,0,0.35);
 @mixin imgs {
     max-width: 100%;
     max-height: 100%;
