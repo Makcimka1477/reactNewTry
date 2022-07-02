@@ -1,12 +1,9 @@
-import './EmployeesListItem.scss';
 import { Component } from 'react';
+import './EmployeesListItem.scss';
 
 class EmployeesListItem extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     salary: this.props.salary,
-        // }
     }
 
     onChange = (e) => {
@@ -20,15 +17,15 @@ class EmployeesListItem extends Component {
         const classes = `${(increase ? 'increase' : '')} ${(premium ? 'premium' : '')}`;
 
         return (
-            <li className={`employeesListItem ${classes}`}>
-                <span onClick={this.props.onPremium} className='employeesListItem__name'>{name}</span>
+            <li className={`employeesListItem${(classes) ? ' ' + classes : ''}`}>
+                <span onClick={this.props.onIncreaseAndPremium} className='employeesListItem__name' data-toggle='premium'>{name}</span>
                 <input id={id} onChange={this.onChange} name='salary' type='text' className='employeesListItem__salary' value={salary + '$'} />
 
                 <div className='employeesListItem__props'>
                     <button onClick={this.props.onDelete} className='btn-trash btn-sm' type='button'>
                         <i className='fas fa-trash'></i>
                     </button>
-                    <button onClick={this.props.onIncrease} className='btn-cookie btn-sm' type='button'>
+                    <button onClick={this.props.onIncreaseAndPremium} data-toggle='increase' className='btn-cookie btn-sm' type='button'>
                         <i className="fas fa-cookie"></i>
                     </button>
                     <button className='btn-star btn-sm' type='button'>

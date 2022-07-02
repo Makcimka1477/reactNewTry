@@ -3,3 +3,25 @@
 .employeesList {
     margin-bottom: $mn;
 }
+
+.noEmployees {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $blueclr;
+    border-radius: 3px;
+    box-shadow: $boxsh;
+    background-color: $blueclr;
+    box-shadow: $boxsh;
+    padding: 20px 0;
+    &__elem {
+        width: 90%;
+        padding: 10px 0px;
+        background-color: $whtclr;
+        color: $blueclr;
+        border-radius: 3px;
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center;
+    }
+}

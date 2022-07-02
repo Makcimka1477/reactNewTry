@@ -45,7 +45,6 @@
         background-color: rgb(240, 234, 234);
     }
     
-
     .fa-star {
         width: 35px;
         height: 35px;
@@ -55,15 +54,14 @@
         color: #FFD700;
         transform: translateX(50px);
         opacity: 0;
-        transition: opacity 0.1s linear,transform 0.2s linear;
+        transition: opacity 0.1s linear, transform 0.2s linear;
     }
     
     &.premium .fa-star {
-        transition: opacity 0.3s linear,transform 0.2s linear;
         opacity: 1;
         transform: translateX(0px);
+        transition: opacity 0.3s linear,transform 0.2s linear;
     }
-
 
     &.increase .employeesListItem__name,
     &.increase .employeesListItem__salary {

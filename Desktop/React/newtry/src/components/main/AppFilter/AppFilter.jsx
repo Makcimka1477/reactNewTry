@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import React from 'react'
 import css from './AppFilter.module.scss';
 import AppFilterBtn from './AppFilterBtn/AppFilterBtn';
+import uuid from 'react-uuid';
 
-const AppFilter = ({ btnsProps, onActive }) => {
+const AppFilter = ({ btnsProps, onActiveBtn}) => {
+    
+    const btns = btnsProps.map(({isActive, id, children, type}, i) => {
 
-    const btns = btnsProps.map(({isActive, id, children, type}) => {
         return (
             <AppFilterBtn
-                onActive={() => onActive(id, type)}
+            onActiveBtn={() => onActiveBtn(id, type)}
                 isActive={isActive}
                 key={id}>
                 {children}

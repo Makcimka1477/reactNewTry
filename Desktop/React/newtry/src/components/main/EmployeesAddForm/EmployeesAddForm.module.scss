@@ -2,45 +2,83 @@
 
 .employeesAddForm {
     background-color: #fff;
+    height: 150px;
     border-radius: 3px;
     box-shadow: $boxsh;
     padding: 20px;
     background-color: $blueclr;
+    position: relative;
+    
     &__title {
         color: $whtclr;
         font-size: 1.8em;
         margin-bottom: 20px;
     }
-    &__inputGroup {
+    
+    &__form {
         display: flex;
         align-items: center;
 
-        & > *:not(:last-child) {
+        &>*:not(:last-child) {
             margin-right: 20px;
         }
-        & > input {
+
+        .formInputName,
+        .formInputSalary {
             height: 32px;
             width: 300px;
             border-radius: 3px;
-            transition: 0.1s linear;
+            transition: 0.2s linear;
+
             &:focus {
                 box-shadow: 0px 0px 15px 0px rgb(248, 226, 194);
             }
         }
     }
-    &__inputBtn {
+
+    &__formBtn {
         height: 32px;
         padding: 0 10px;
-        border-radius:3px;
+        border-radius: 3px;
         border: 1px solid $whtclr;
         color: $whtclr;
         transition: 0.2s linear;
+
         &:focus {
-            background-color: darken($blueclr,10%);
+            background-color: darken($blueclr, 10%);
             box-shadow: 2px 2px 10px 0px white;
         }
+
         &:hover {
-            background-color: darken($blueclr,10%); 
+            background-color: darken($blueclr, 10%);
         }
+    }
+
+
+
+    .error > div {
+        position: absolute;
+        padding: 5px 10px 0px 10px;
+        top: 90px;
+        text-align: center;
+        transition: all 0.2s linear;
+        z-index: -1;
+        opacity: 0;
+        color: rgba(255, 0, 0, 0.9);
+        border-bottom: 1px solid rgba(255, 0, 0, 0.5);
+        &.active {
+            top: 105px;
+            text-shadow: red 0 0 15px;
+            z-index: 1;
+            opacity: 1;
+        }
+    }
+    
+    .error__name {
+        left: 30px;
+    }
+
+    .error__salary {
+        left: 350px;
     }
 }

@@ -10,9 +10,10 @@ import EmployeesAddForm from '../main/EmployeesAddForm/EmployeesAddForm';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+  constructor() {
+    super()
+    this.state = JSON.parse(window.localStorage.getItem('state')) ||
+    {
       employees: [
         { id: 1, name: 'John C.', salary: 800, premium: false, increase: true },
         { id: 2, name: 'Alex M.', salary: 3000, premium: true, increase: false },
@@ -20,7 +21,7 @@ class App extends Component {
       ],
       btnsProps: [
         { id: 1, children: 'Все сотрудники', isActive: true, type: 'all' },
-        { id: 2, children: 'На повышение', isActive: false, type: 'rised' },
+        { id: 2, children: 'На повышение', isActive: false, type: 'increased' },
         { id: 3, children: 'З/П больше 1000$', isActive: false, type: 'over1000$' },
         { id: 4, children: 'На премию', isActive: false, type: 'premium' },
       ],
@@ -29,64 +30,22 @@ class App extends Component {
     };
   }
 
+  // setState(state) {
+  //   window.localStorage.setItem('state', JSON.stringify(this.state));
+  //   super.setState(state);
+  // }
 
-  onDelete = (id) => {
-    this.setState(state => ({
-      employees: state.employees.filter(el => el.id !== id)
-    }))
+  onSearch = (e) => {
+    this.setState({ searchValue: { ...this.state.searchValue, text: e.target.value } });
   }
 
-  onAddEmployees = (obj) => {
-    this.setState(state => ({
-      employees: [...state.employees, obj],
-    }));
-  }
-
-  onPremium = (id) => {
-    // console.log('prem', id);
-    this.setState(state => ({ employees: state.employees.map(el => el.id === id ? { ...el, premium: !el.premium } : el) }));
-
-  }
-
-  onIncrease = (id) => {
-    // console.log('inc', id);
-    this.setState(({ employees }) => ({ employees: employees.map(el => el.id === id ? { ...el, increase: !el.increase } : el) }));
-  }
-
-  onActive = (id, type) => {
-    this.setState(state => ({ btnsProps: state.btnsProps.map(el => (id === el.id) ? { ...el, isActive: true } : { ...el, isActive: false }) }))
-    this.setState({ searchValue: { ...this.state.searchValue, type: type } })
-  }
-
-  onSalary = (value, id) => {
-    const sal = value.replace(/\D+/g, '');
-
-    this.setState(state => ({ employees: state.employees.map(el => el.id === +id ? { ...el, salary: sal } : el) }));
-  }
-
-  onSearch = (text) => {
-    this.setState({ searchValue: { ...this.state.searchValue, text: text } });
-  }
-
-
-
-  render() {
-    const { employees, btnsProps, searchValue } = this.state;
-
-
-    const withPremium = employees.reduce((acc, next) => (next.increase) ? acc + 1 : acc, 0)
-
-
-
-
-    const filteredEmployees = employees.filter(el => {
-
-      if (el.name.toLowerCase().indexOf(searchValue.text.toLowerCase()) > -1) {
-
-        switch (searchValue.type) {
+  filteredEmployeesFunc = (items, text, type) => {
+    return items.filter(el => {
+      if (el.name.toLowerCase().indexOf(text.toLowerCase()) > -1) {
+        switch (type) {
           case 'all':
             return el;
-          case 'rised':
+          case 'increased':
             if (el.increase) {
               return el;
             }
@@ -104,26 +63,68 @@ class App extends Component {
         }
       }
 
-    });
+    })
+  }
 
+  onDelete = (id) => {
+    this.setState(state => ({
+      employees: state.employees.filter(el => el.id !== id)
+    }))
+  }
 
+  onActiveBtn = (id, type) => {
+    this.setState(state => ({ searchValue: { ...state.searchValue, type: type }, btnsProps: state.btnsProps.map(el => (id === el.id) ? { ...el, isActive: true } : { ...el, isActive: false }) }));
+  }
+
+  onSalary = (value, id) => {
+    const sal = value.replace(/\D+/g, '');
+
+    this.setState(state => ({ employees: state.employees.map(el => el.id === +id ? { ...el, salary: sal } : el) }));
+  }
+
+  onIncreaseAndPremium = (id, dataAtr) => {
+    // РЕШЕНИЕ ЧЕРЕЗ ДАТА-АТРИБУТЫ e.currentTarget.getAttribute('data-something')
+    // dataAtr обязательно в [] чтобы не было ошибок с именами
+    this.setState(state => ({ employees: state.employees.map(el => el.id === id ? { ...el, [dataAtr]: !el[dataAtr] } : el) }))
+  }
+
+  onAddEmployees = (obj) => {
+
+    if (obj.name.length < 3) {
+      return;
+    }
+    if (+obj.salary < 100) {
+      return;
+    }
+
+    this.setState(state => ({
+      employees: [...state.employees, obj],
+    }));
+  }
+
+  render() {
+    const { btnsProps, employees, searchValue } = this.state;
+
+    const filteredEmployees = this.filteredEmployeesFunc(employees, searchValue.text, searchValue.type);
+    const withPremium = filteredEmployees.reduce((acc, next) => (next.increase) ? acc + 1 : acc, 0)
 
 
     return (
       <div className={css.app}>
 
-        {/* <WhoAmI name='John' surname='Smith' link='aaa.com' />
-      <WhoAmI name='Bred' surname='Tomson' link='bbb.com' /> */}
-
         <AppInfo withPremium={withPremium} employeesCount={employees.length} />
         <div className={css.SearchPanelWrapper}>
+
+
           <SearchPanel onSearch={this.onSearch} />
-          <AppFilter onActive={this.onActive} btnsProps={btnsProps} />
+
+          <AppFilter onActiveBtn={this.onActiveBtn} btnsProps={btnsProps} />
         </div>
 
-        <EmployeesList onSalary={this.onSalary} onPremium={this.onPremium} onIncrease={this.onIncrease} onDelete={this.onDelete} employees={filteredEmployees} />
+        <EmployeesList onSalary={this.onSalary} onIncreaseAndPremium={this.onIncreaseAndPremium} onDelete={this.onDelete} employees={filteredEmployees} />
 
-        <EmployeesAddForm onAddEmployees={this.onAddEmployees} employees={employees} />
+
+        <EmployeesAddForm validateObj={this.validateObj} onAddEmployees={this.onAddEmployees} employees={filteredEmployees} />
 
       </div>
     );
