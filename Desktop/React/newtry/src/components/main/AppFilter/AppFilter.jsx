@@ -3,13 +3,14 @@ import css from './AppFilter.module.scss';
 import AppFilterBtn from './AppFilterBtn/AppFilterBtn';
 import uuid from 'react-uuid';
 
-const AppFilter = ({ btnsProps, onActiveBtn}) => {
-    
-    const btns = btnsProps.map(({isActive, id, children, type}, i) => {
+const AppFilter = ({ btnsProps, onActiveBtn }) => {
+
+    const btns = btnsProps.map(({ isActive, id, children, type }) => {
 
         return (
             <AppFilterBtn
-            onActiveBtn={() => onActiveBtn(id, type)}
+                tabIndex={2}
+                onActiveBtn={() => onActiveBtn(id, type)}
                 isActive={isActive}
                 key={id}>
                 {children}

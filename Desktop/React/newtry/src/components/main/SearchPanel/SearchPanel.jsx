@@ -4,7 +4,7 @@ const SearchPanel = ({ onSearch }) => {
 
     return (
         <div className={css.searchPanel}>
-            <input onChange={onSearch} className={css.searchPanelInput} placeholder="Найти сотрудника" type="text" />
+            <input tabIndex={1} onChange={onSearch} className={css.searchPanelInput} placeholder="Найти сотрудника" type="text" />
         </div>
     );
 }

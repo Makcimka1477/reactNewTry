@@ -18,7 +18,15 @@ class EmployeesListItem extends Component {
 
         return (
             <li className={`employeesListItem${(classes) ? ' ' + classes : ''}`}>
-                <span onClick={this.props.onIncreaseAndPremium} className='employeesListItem__name' data-toggle='premium'>{name}</span>
+                <span onClick={(e) => {
+                    if (e.button === 0) {
+                        e.currentTarget.blur()
+                    }
+                    this.props.onIncreaseAndPremium(e);
+                    }}
+                     tabIndex='3'
+                    //   onClick={this.props.onIncreaseAndPremium}
+                      className='employeesListItem__name' data-toggle='premium'>{name}</span>
                 <input id={id} onChange={this.onChange} name='salary' type='text' className='employeesListItem__salary' value={salary + '$'} />
 
                 <div className='employeesListItem__props'>
@@ -28,7 +36,7 @@ class EmployeesListItem extends Component {
                     <button onClick={this.props.onIncreaseAndPremium} data-toggle='increase' className='btn-cookie btn-sm' type='button'>
                         <i className="fas fa-cookie"></i>
                     </button>
-                    <button className='btn-star btn-sm' type='button'>
+                    <button className='btn-star btn-sm' type='button' tabIndex="-1">
                         <i className='fas fa-star'></i>
                     </button>
                 </div>

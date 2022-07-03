@@ -17,6 +17,7 @@
         font-size: 20px;
         cursor: pointer;
         min-width: 450px;
+        padding-left: 10px;
     }
 
     input {
@@ -39,12 +40,12 @@
         color: #e09f3e;
         background-color: rgb(240, 234, 234);
     }
-    
+
     .btn-trash {
         color: #e5383b;
         background-color: rgb(240, 234, 234);
     }
-    
+
     .fa-star {
         width: 35px;
         height: 35px;
@@ -56,11 +57,11 @@
         opacity: 0;
         transition: opacity 0.1s linear, transform 0.2s linear;
     }
-    
+
     &.premium .fa-star {
         opacity: 1;
         transform: translateX(0px);
-        transition: opacity 0.3s linear,transform 0.2s linear;
+        transition: opacity 0.3s linear, transform 0.2s linear;
     }
 
     &.increase .employeesListItem__name,

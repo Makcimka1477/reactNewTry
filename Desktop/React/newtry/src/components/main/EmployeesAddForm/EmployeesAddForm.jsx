@@ -64,9 +64,9 @@ class EmployeesAddForm extends Component {
             <div className={css.employeesAddForm}>
                 <h1 className={css.employeesAddForm__title}>Добавить нового сотрудника</h1>
                 <form onSubmit={(e) => this.onSubmit(obj, e)} className={css.employeesAddForm__form}>
-                    <input onChange={this.onChanger} name='name' className={css.formInputName} type="text" placeholder='Имя сотрудника' value={name} tabIndex='1' />
-                    <input onChange={this.onChanger} name='salary' className={css.formInputSalary} type="text" placeholder='З/П в $' value={salary} tabIndex='2' />
-                    <button type='submit' className={css.employeesAddForm__formBtn} tabIndex='3'>Добавить</button>
+                    <input onChange={this.onChanger} name='name' className={css.formInputName} type="text" placeholder='Имя сотрудника' value={name}  />
+                    <input onChange={this.onChanger} name='salary' className={css.formInputSalary} type="text" placeholder='З/П в $' value={salary}  />
+                    <button type='submit' className={css.employeesAddForm__formBtn} >Добавить</button>
                 </form>
                 <div className={css.error}>
                     <div className={activeErrorName}>Мало символов</div>
